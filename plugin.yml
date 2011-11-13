@@ -1,0 +1,12 @@
+name: TPeH
+main: com.imdeity.tpeh.TPeH
+version: 1.0
+language: english.yml
+author: vanZeben
+website: http://imdeity.com/
+softdepend: [DeityAPI]
+commands:
+    teleportaccept:
+        aliases: [tpa]
+    teleportaccepthere:
+        aliases: [tpah]
