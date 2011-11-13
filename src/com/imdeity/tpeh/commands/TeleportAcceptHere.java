@@ -68,8 +68,8 @@ public class TeleportAcceptHere implements CommandExecutor {
                 Deity.player.teleport(teleportee, teleporter.getLocation());
                 Deity.chat.sendPlayerMessage(teleporter, "Teleport", "You teleported "+teleportee.getName()+" to you.");
                 Deity.chat.sendPlayerMessage(teleportee, "Teleport", "You teleported to "+teleporter.getName()+".");
-                String sql = "INSERT INTO `kingdoms`.`deity_teleports` (`teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?);";
-                Deity.data.getDB().Write(sql, teleporter.getName(), teleportee.getName(), 1);
+                String sql = "INSERT INTO `kingdoms`.`deity_teleports` (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
+                Deity.data.getDB().Write(sql, "tpah", teleporter.getName(), teleportee.getName(), 1);
             }
         }));
 
@@ -79,8 +79,8 @@ public class TeleportAcceptHere implements CommandExecutor {
             public void run() {
                 Deity.chat.sendPlayerError(teleporter, "Teleport", "Sorry the teleport was denied");
                 Deity.chat.sendPlayerMessage(teleportee, "Teleport", "You denied the teleport");
-                String sql = "INSERT INTO `kingdoms`.`deity_teleports` (`teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?);";
-                Deity.data.getDB().Write(sql, teleporter.getName(), teleportee.getName(), 0);
+                String sql = "INSERT INTO `kingdoms`.`deity_teleports` (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
+                Deity.data.getDB().Write(sql, "tpah", teleporter.getName(), teleportee.getName(), 0);
             }
         }));
         Question question = new Question(teleportee.getName(), "Do you agree to this teleport?", options);

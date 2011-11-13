@@ -63,11 +63,13 @@ public class TPeH extends JavaPlugin {
                                     "teleports")
                             + " ("
                             + "`id` INT(16) NOT NULL AUTO_INCREMENT ,"
-                            + "`teleporter` VARCHAR(30) NOT NULL ,"
+                            + "`type` VARCHAR(4) NOT NULL ,"
+                            + "`teleporter` VARCHAR(16) NOT NULL ,"
                             + "`teleportee` VARCHAR(16) NOT NULL ,"
                             + "`is_allowed` INT(1) NOT NULL ,"
                             + "PRIMARY KEY (`id`),"
-                            + "UNIQUE KEY (`teleporter`)"
+                            + "INDEX (`teleporter`)"
+                            + "INDEX (`type`)"
                             + ") ENGINE = MYISAM COMMENT =  'Teleporting Record Log';");
         }
     }
