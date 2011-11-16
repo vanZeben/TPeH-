@@ -45,6 +45,7 @@ public class TeleportAccept implements CommandExecutor {
                         || Deity.perm.isSubAdmin(teleportee)) {
                     Deity.chat.sendPlayerError(player, "Teleport",
                             "You cannot teleport to admins.");
+                    return false;
                 }
                 Deity.chat.sendPlayerMessage(teleportee, player.getName()
                         + " has requested to teleport to you.");
