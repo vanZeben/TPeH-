@@ -68,7 +68,7 @@ public class TPeH extends JavaPlugin {
                             + "`teleportee` VARCHAR(16) NOT NULL ,"
                             + "`is_allowed` INT(1) NOT NULL ,"
                             + "PRIMARY KEY (`id`),"
-                            + "INDEX (`teleporter`)"
+                            + "INDEX (`teleporter`),"
                             + "INDEX (`type`)"
                             + ") ENGINE = MYISAM COMMENT =  'Teleporting Record Log';");
         }
