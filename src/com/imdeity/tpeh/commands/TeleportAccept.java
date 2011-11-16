@@ -28,7 +28,7 @@ public class TeleportAccept implements CommandExecutor {
             String commandLabel, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (Deity.perm.has(player, "deity.teleport")) {
+            if (Deity.perm.has(player, "deity.teleport.accept")) {
                 return wrapCommand(player, args);
             } else {
                 Deity.chat.sendPlayerError(player, "Teleport", "Insufficient Vespene Gas.");
