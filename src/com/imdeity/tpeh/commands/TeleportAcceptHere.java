@@ -31,7 +31,8 @@ public class TeleportAcceptHere implements CommandExecutor {
             if (Deity.perm.has(player, "deity.teleport.accepthere")) {
                 return wrapCommand(player, args);
             } else {
-                Deity.chat.sendPlayerError(player, "Teleport", "Insufficient Vespene Gas.");
+                Deity.chat.sendPlayerError(player, "Teleport",
+                        "Insufficient Vespene Gas.");
             }
         }
         return false;
@@ -58,7 +59,7 @@ public class TeleportAcceptHere implements CommandExecutor {
         return false;
 
     }
-    
+
     public void executeTeleport(Player teleporter, Player teleportee) {
 
         List<Option> options = new ArrayList<Option>();
@@ -67,10 +68,15 @@ public class TeleportAcceptHere implements CommandExecutor {
             @Override
             public void run() {
                 Deity.player.teleport(teleportee, teleporter.getLocation());
-                Deity.chat.sendPlayerMessage(teleporter, "Teleport", "You teleported "+teleportee.getName()+" to you.");
-                Deity.chat.sendPlayerMessage(teleportee, "Teleport", "You teleported to "+teleporter.getName()+".");
-                String sql = "INSERT INTO `kingdoms`.`deity_teleports` (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
-                Deity.data.getDB().Write(sql, "tpah", teleporter.getName(), teleportee.getName(), 1);
+                Deity.chat.sendPlayerMessage(teleporter, "Teleport",
+                        "You teleported " + teleportee.getName() + " to you.");
+                Deity.chat.sendPlayerMessage(teleportee, "Teleport",
+                        "You teleported to " + teleporter.getName() + ".");
+                String sql = "INSERT INTO "
+                        + Deity.data.getDB().tableName("deity_", "teleports")
+                        + " (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
+                Deity.data.getDB().Write(sql, "tpah", teleporter.getName(),
+                        teleportee.getName(), 1);
             }
         }));
 
@@ -78,13 +84,19 @@ public class TeleportAcceptHere implements CommandExecutor {
                 teleportee) {
             @Override
             public void run() {
-                Deity.chat.sendPlayerError(teleporter, "Teleport", "Sorry the teleport was denied");
-                Deity.chat.sendPlayerMessage(teleportee, "Teleport", "You denied the teleport");
-                String sql = "INSERT INTO `kingdoms`.`deity_teleports` (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
-                Deity.data.getDB().Write(sql, "tpah", teleporter.getName(), teleportee.getName(), 0);
+                Deity.chat.sendPlayerError(teleporter, "Teleport",
+                        "Sorry the teleport was denied");
+                Deity.chat.sendPlayerMessage(teleportee, "Teleport",
+                        "You denied the teleport");
+                String sql = "INSERT INTO "
+                        + Deity.data.getDB().tableName("deity_", "teleports")
+                        + " (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
+                Deity.data.getDB().Write(sql, "tpah", teleporter.getName(),
+                        teleportee.getName(), 0);
             }
         }));
-        Question question = new Question(teleportee.getName(), "Do you agree to this teleport?", options);
+        Question question = new Question(teleportee.getName(),
+                "Do you agree to this teleport?", options);
         try {
             plugin.appendQuestion(plugin.getQuestioner(), question);
         } catch (Exception e) {
