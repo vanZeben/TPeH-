@@ -1,6 +1,6 @@
 name: TPeH
 main: com.imdeity.tpeh.TPeH
-version: 1.2
+version: 1.3
 language: english.yml
 author: vanZeben
 website: http://imdeity.com/
@@ -10,3 +10,9 @@ commands:
         aliases: [tpa]
     teleportaccepthere:
         aliases: [tpah]
+    asc:
+        aliases: [ascend]
+        usage: /ascend [number]
+    desc:
+        aliases: [descend]
+        usage: /descend [number]

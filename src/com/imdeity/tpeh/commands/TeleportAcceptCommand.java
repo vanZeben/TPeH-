@@ -15,11 +15,11 @@ import com.imdeity.deityapi.Deity;
 import com.imdeity.tpeh.TPeH;
 import com.imdeity.tpeh.questioner.ConfirmQuestionTask;
 
-public class TeleportAcceptHere implements CommandExecutor {
+public class TeleportAcceptCommand implements CommandExecutor {
 
 	private TPeH plugin;
 
-	public TeleportAcceptHere(TPeH instance) {
+	public TeleportAcceptCommand(TPeH instance) {
 		this.plugin = instance;
 	}
 
@@ -28,7 +28,7 @@ public class TeleportAcceptHere implements CommandExecutor {
 			String commandLabel, String[] args) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
-			if (Deity.perm.has(player, "deity.teleport.accepthere")) {
+			if (Deity.perm.has(player, "deity.teleport.accept")) {
 				return wrapCommand(player, args);
 			} else {
 				Deity.chat.sendPlayerError(player, "Teleport",
@@ -45,7 +45,7 @@ public class TeleportAcceptHere implements CommandExecutor {
 				if (Deity.perm.isAdmin(teleportee)
 						|| Deity.perm.isSubAdmin(teleportee)) {
 					Deity.chat.sendPlayerError(player, "Teleport",
-							"You cannot summon admins.");
+							"You cannot teleport to admins.");
 					return false;
 				}
 				if (teleportee.getWorld().getName().equalsIgnoreCase("events")) {
@@ -59,7 +59,7 @@ public class TeleportAcceptHere implements CommandExecutor {
 					return false;
 				}
 				Deity.chat.sendPlayerMessage(teleportee, player.getName()
-						+ " has requested that you be teleported to him.");
+						+ " has requested to teleport to you.");
 				this.executeTeleport(player, teleportee);
 				return true;
 			}
@@ -67,7 +67,6 @@ public class TeleportAcceptHere implements CommandExecutor {
 			Deity.chat.sendPlayerMessage(player, "Teleport",
 					"Sorry but you there was an error in that command.");
 		return false;
-
 	}
 
 	public void executeTeleport(Player teleporter, Player teleportee) {
@@ -77,15 +76,16 @@ public class TeleportAcceptHere implements CommandExecutor {
 				teleportee) {
 			@Override
 			public void run() {
-				Deity.player.teleport(teleportee, teleporter.getLocation());
 				Deity.chat.sendPlayerMessage(teleporter, "Teleport",
-						"You teleported " + teleportee.getName() + " to you.");
+						"You teleported to " + teleportee.getName() + ".");
 				Deity.chat.sendPlayerMessage(teleportee, "Teleport",
-						"You teleported to " + teleporter.getName() + ".");
+						teleporter.getName() + " teleported to you.");
+
+				Deity.player.teleport(teleporter, teleportee.getLocation());
 				String sql = "INSERT INTO "
 						+ Deity.data.getDB().tableName("deity_", "teleports")
 						+ " (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
-				Deity.data.getDB().Write(sql, "tpah", teleporter.getName(),
+				Deity.data.getDB().Write(sql, "tpa", teleporter.getName(),
 						teleportee.getName(), 1);
 			}
 		}));
@@ -101,7 +101,7 @@ public class TeleportAcceptHere implements CommandExecutor {
 				String sql = "INSERT INTO "
 						+ Deity.data.getDB().tableName("deity_", "teleports")
 						+ " (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";
-				Deity.data.getDB().Write(sql, "tpah", teleporter.getName(),
+				Deity.data.getDB().Write(sql, "tpa", teleporter.getName(),
 						teleportee.getName(), 0);
 			}
 		}));
