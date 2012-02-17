@@ -8,8 +8,6 @@ import ca.xshade.questionmanager.Option;
 import ca.xshade.questionmanager.Question;
 
 import com.imdeity.deityapi.Deity;
-import com.imdeity.tpeh.commands.AscendCommand;
-import com.imdeity.tpeh.commands.DescendCommand;
 import com.imdeity.tpeh.commands.TeleportAcceptCommand;
 import com.imdeity.tpeh.commands.TeleportAcceptHereCommand;
 import com.imdeity.tpeh.questioner.TPeHQuestionTask;
@@ -40,9 +38,6 @@ public class TPeH extends JavaPlugin {
 	private void registerCommands() {
 		getCommand("teleportaccept").setExecutor(new TeleportAcceptCommand(this));
 		getCommand("teleportaccepthere").setExecutor(new TeleportAcceptHereCommand(this));
-		this.getCommand("Asc").setExecutor(new AscendCommand());
-		this.getCommand("Desc").setExecutor(new DescendCommand());
-
 	}
 
 	private boolean checkPlugins() {

@@ -10,9 +10,3 @@ commands:
         aliases: [tpa]
     teleportaccepthere:
         aliases: [tpah]
-    asc:
-        aliases: [ascend]
-        usage: /ascend [number]
-    desc:
-        aliases: [descend]
-        usage: /descend [number]
