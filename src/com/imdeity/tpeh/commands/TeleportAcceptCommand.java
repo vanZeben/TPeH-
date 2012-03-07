@@ -81,7 +81,7 @@ public class TeleportAcceptCommand implements CommandExecutor {
 				Deity.chat.sendPlayerMessage(teleportee, "Teleport",
 						teleporter.getName() + " teleported to you.");
 
-				Deity.player.teleport(teleporter, teleportee.getLocation());
+				Deity.player.teleportAsCommand(teleporter, teleportee.getLocation());
 				String sql = "INSERT INTO "
 						+ Deity.data.getDB().tableName("deity_", "teleports")
 						+ " (`type`, `teleporter`, `teleportee`, `is_allowed`) VALUES (?, ?, ?, ?);";

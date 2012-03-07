@@ -77,7 +77,7 @@ public class TeleportAcceptHereCommand implements CommandExecutor {
 				teleportee) {
 			@Override
 			public void run() {
-				Deity.player.teleport(teleportee, teleporter.getLocation());
+				Deity.player.teleportAsCommand(teleportee, teleporter.getLocation());
 				Deity.chat.sendPlayerMessage(teleporter, "Teleport",
 						"You teleported " + teleportee.getName() + " to you.");
 				Deity.chat.sendPlayerMessage(teleportee, "Teleport",
