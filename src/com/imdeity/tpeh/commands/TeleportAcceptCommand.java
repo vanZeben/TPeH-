@@ -52,6 +52,7 @@ public class TeleportAcceptCommand implements CommandExecutor {
 					Deity.chat.sendPlayerError(player, "Teleport", "You cannot teleport while in the event world");
 					return false;
 				}
+				Deity.chat.sendPlayerMessage(player, "You requested to teleport to " + teleportee.getName());
 				Deity.chat.sendPlayerMessage(teleportee, player.getName() + " has requested to teleport to you.");
 				this.executeTeleport(player, teleportee);
 				return true;
