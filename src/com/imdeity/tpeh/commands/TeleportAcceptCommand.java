@@ -27,11 +27,10 @@ public class TeleportAcceptCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
-			if (Deity.perm.has(player, "deity.teleport.accept")) {
+			if (Deity.perm.has(player, "deity.teleport.accept") || Deity.perm.isLeastModerator(player)) {
 				return wrapCommand(player, args);
-			} else {
-				Deity.chat.sendPlayerError(player, "Teleport", "Insufficient Vespene Gas.");
 			}
+			return false;
 		}
 		return false;
 	}
