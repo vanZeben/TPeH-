@@ -6,6 +6,8 @@ author: vanZeben
 website: http://imdeity.com/
 softdepend: [DeityAPI]
 commands:
+    teleport:
+        aliases: [tp]
     teleportaccept:
         aliases: [tpa]
     teleportaccepthere:
