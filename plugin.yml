@@ -8,6 +8,10 @@ softdepend: [DeityAPI]
 commands:
     teleport:
         aliases: [tp]
+    Put:
+        aliases: [place]
+    teleporthere:
+        aliases: [summon, s]
     teleportaccept:
         aliases: [tpa]
     teleportaccepthere:
